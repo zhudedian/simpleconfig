@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/base_view"
+    android:background="#191a23"
+    tools:context=".NoticeActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:text="请长按音响顶部圆形配网按钮，蓝色灯亮起后点击开始配网"
+        android:gravity="center_horizontal"
+        android:textSize="40sp"
+        android:textColor="#fff"/>
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:text="开始配网"
+        android:textColor="#ffffff"
+        android:textSize="35sp"
+        android:background="@drawable/back_button_tip"/>
+</RelativeLayout>

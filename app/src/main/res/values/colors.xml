@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#191a23</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="back_activity">#191a23</color>
+    <color name="back_frag_wifi_list">#7c3e3e3e</color>
+    <color name="driver_list_wifi">#a6666873</color>
+    <color name="back_button_tip">#0193fc</color>
+    <color name="freshview">#36adf7</color>
+    <color name="wifi_signal_gray">#537e7e7e</color>
+</resources>

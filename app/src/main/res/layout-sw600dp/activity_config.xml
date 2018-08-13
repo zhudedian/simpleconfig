@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/base_view"
+    android:background="#191a23"
+    tools:context=".ConfigActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="正在配网中"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="50dp"
+        android:textSize="40sp"
+        android:textColor="#fff"/>
+    <TextView
+        android:layout_width="600dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="100dp"
+        android:text="等待音响提示网络连接成功，表示配网成功请结束本页面。\n\n如果长时间未配网成功，请确保音响在配网状态，并且检查WiFi密码是否正确"
+        android:textSize="30sp"
+        android:textColor="#9c9c9c"/>
+
+    <com.edong.simpleconfig.view.ProgressIcon
+        android:id="@+id/fresh_view"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="100dp"
+        android:layout_marginBottom="50dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp" />
+    <Button
+        android:id="@+id/end_config_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="50dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:text="结束配网"
+        android:textColor="#ffffff"
+        android:textSize="35sp"
+        android:background="@drawable/back_button_tip"/>
+
+</RelativeLayout>

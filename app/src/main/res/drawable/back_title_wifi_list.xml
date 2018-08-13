@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <gradient
+            android:startColor="@color/back_activity"
+            android:centerY="0.5"
+            android:endColor="@color/back_frag_wifi_list"
+            android:angle="270"
+            />
+
+</shape>
