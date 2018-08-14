@@ -66,13 +66,12 @@ public class WifiListPopu {
     }
 
     public void dismiss(){
-        WifiListFrag  fragment = (WifiListFrag) context.getSupportFragmentManager().findFragmentById(R.id.wifi_list_frag);
-        if(fragment != null){
-            context.getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-        }
+//        WifiListFrag  fragment = (WifiListFrag) context.getSupportFragmentManager().findFragmentById(R.id.wifi_list_frag);
+//        if(fragment != null){
+//            context.getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+//        }
         if (popupWindow!=null&&popupWindow.isShowing()) {
             popupWindow.dismiss();
-            popupWindow = null;
         }
     }
     public boolean isCancelable(){

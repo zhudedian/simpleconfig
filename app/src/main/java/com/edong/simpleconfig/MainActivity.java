@@ -127,6 +127,19 @@ public class MainActivity extends AppCompatActivity {
 
         super.onResume();
     }
+    private long lastBackPressedTime = 0;
+    @Override
+    public void onBackPressed(){
 
+        if (enterPasswordFrag==null||!enterPasswordFrag.onBackPressed()){
+            if (System.currentTimeMillis()-lastBackPressedTime>2000){
+                Toast.makeText(MainActivity.this,"再按一次退出应用",Toast.LENGTH_LONG).show();
+                lastBackPressedTime = System.currentTimeMillis();
+            }else {
+                finish();
+            }
+        }
+
+    }
 
 }

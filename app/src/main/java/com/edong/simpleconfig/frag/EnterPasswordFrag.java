@@ -41,6 +41,7 @@ public class EnterPasswordFrag extends Fragment {
     private EditText passWord;
     private Button nextBt;
     private WifiManager mWifiManager;
+    private WifiListPopu wifiListPopu;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -141,14 +142,17 @@ public class EnterPasswordFrag extends Fragment {
                     return;
                 }
                 if (!isTwoPane) {
-                    WifiListPopu wifiListPopu = new WifiListPopu((AppCompatActivity) getActivity(), true);
+                    if (wifiListPopu==null) {
+                        wifiListPopu = new WifiListPopu((AppCompatActivity) getActivity(), true);
+                        wifiListPopu.setOnItemClickListener(new WifiListPopu.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(ScanResult scanResult) {
+                                itemClick(scanResult);
+                            }
+                        });
+
+                    }
                     wifiListPopu.show(wifiName);
-                    wifiListPopu.setOnItemClickListener(new WifiListPopu.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(ScanResult scanResult) {
-                            itemClick(scanResult);
-                        }
-                    });
                 }
             }
         });
@@ -229,6 +233,13 @@ public class EnterPasswordFrag extends Fragment {
         }
     };
 
+    public boolean onBackPressed(){
+        if (wifiListPopu!=null&&wifiListPopu.isShowing()){
+            wifiListPopu.dismiss();
+            return true;
+        }
+        return false;
+    }
     public String getPassword(String ssid){
         SharedPreferences preferences = getActivity().getSharedPreferences("edong_config_password", Context.MODE_PRIVATE);
         return preferences.getString(ssid,"");
