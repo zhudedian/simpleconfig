@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -54,26 +55,46 @@ public class WifiListFrag extends Fragment {
     private void register() {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
+        intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
         getActivity().registerReceiver(millsReceiver,intentFilter);
     }
     private BroadcastReceiver millsReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             WifiUtil.startScan();
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    int times = 6;
-                    for (int i = 0;i<times;i++){
-                        getWifiList();
-                        try {
-                            Thread.sleep(60000/times);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+            if (intent.getAction().equals(Intent.ACTION_TIME_TICK)) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        int times = 6;
+                        for (int i = 0; i < times; i++) {
+                            getWifiList();
+                            try {
+                                Thread.sleep(60000 / times);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
+                }).start();
+            }else if (intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)){
+                NetworkInfo info = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+                if (info.isConnected()&&scanResults.size() == 0) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            while (scanResults.size() == 0) {
+                                getWifiList();
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }).start();
                 }
-            }).start();
+            }
         }
     };
     private void getWifiList(){

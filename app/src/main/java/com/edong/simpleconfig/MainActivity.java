@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -71,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,"权限被拒绝",Toast.LENGTH_LONG).show();
                     finish();
                 }
+                break;
+             default:
+                break;
         }
     }
     private  void init(){
@@ -122,6 +126,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+//        Log.e("edong","keyCode="+keyCode);
+
+        return super.onKeyDown(keyCode, event);
+    }
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+//        Log.e("edong","dispatchKeyEvent,keyCode="+event.getKeyCode()+",event.getAction()="+event.getAction());
+        if (event.getKeyCode()==KeyEvent.KEYCODE_ENTER&&event.getAction()==KeyEvent.ACTION_DOWN){
+            if (enterPasswordFrag!=null){
+                enterPasswordFrag.onEnterPressed();
+                return true;
+            }
+        }
+
+        return super.dispatchKeyEvent(event);
+    }
+        @Override
     public void onResume() {
 
 

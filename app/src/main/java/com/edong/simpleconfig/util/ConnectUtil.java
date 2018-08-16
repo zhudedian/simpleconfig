@@ -6,6 +6,7 @@ import android.net.wifi.WifiManager;
 
 import java.util.List;
 import android.os.Handler;
+import android.util.Log;
 
 import static com.edong.simpleconfig.sclib.ConfigLibrary.configLibrary;
 
@@ -19,6 +20,17 @@ public class ConnectUtil {
     public static void init(Activity activity){
         configLibrary.rtk_sc_init();
         configLibrary.WifiInit(activity);
+    }
+    public static void createWifi(WifiManager wifiManager){
+        WifiConfiguration config = new WifiConfiguration();
+        config.SSID = "\"" + ssid + "\"";
+        config.preSharedKey = "\"" + password + "\"";
+        int networkId = wifiManager.addNetwork(config);
+        Log.e("edong","networkId="+networkId);
+        if (networkId!=-1) {
+            wifiManager.updateNetwork(config);
+            wifiManager.saveConfiguration();
+        }
     }
     public static void conncetWifi(WifiManager wifiManager){
         WifiConfiguration config = new WifiConfiguration();

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +72,7 @@ public class EnterPasswordFrag extends Fragment {
 
         if(WifiUtil.getWifiStatus() != WifiManager.WIFI_STATE_ENABLED) {
             WifiUtil.wifiOpen();
+            WifiUtil.startScan();
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -88,18 +91,19 @@ public class EnterPasswordFrag extends Fragment {
                 }
             }).start();
         } else {
-            WifiUtil.startScan();
-            List<ScanResult> scanResults = WifiUtil.getScanResults();
-            if (scanResults!=null&&scanResults.size()>0) {
-                String lastSeleteWifi = getLastSelectWifi(scanResults);
-                if (!lastSeleteWifi.equals("")) {
-                    wifiName.setText(lastSeleteWifi);
-                    String password = getPassword(lastSeleteWifi);
-                    if (password != null && !password.equals("")) {
-                        passWord.setText(password);
+            if (wifiName.getText().toString().equals(getResources().getString(R.string.default_wifi_name))) {
+                List<ScanResult> scanResults = WifiUtil.getScanResults();
+                if (scanResults != null && scanResults.size() > 0) {
+                    String lastSeleteWifi = getLastSelectWifi(scanResults);
+                    if (!lastSeleteWifi.equals("")) {
+                        wifiName.setText(lastSeleteWifi);
+                        String password = getPassword(lastSeleteWifi);
+                        if (password != null && !password.equals("")) {
+                            passWord.setText(password);
+                        }
+                    } else {
+                        wifiName.setText(scanResults.get(0).SSID);
                     }
-                } else {
-                    wifiName.setText(scanResults.get(0).SSID);
                 }
             }
         }
@@ -159,22 +163,7 @@ public class EnterPasswordFrag extends Fragment {
         nextBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String ssid = wifiName.getText().toString();
-                String pword = passWord.getText().toString();
-                if (ssid.equals("")||pword.equals("")){
-                    Toast.makeText(getContext(),"请输入wifi密码",Toast.LENGTH_SHORT).show();
-                }else {
-                    ConnectUtil.setSsid(ssid);
-                    ConnectUtil.setPassword(pword);
-                    setPassword(ssid,pword);
-                    if (WifiUtil.isWifiConnect(getContext())){
-                        startNoticeActivity();
-                    }else {
-                        ConnectUtil.conncetWifi(mWifiManager);
-                        isNeedToNoticeActivity = true;
-                    }
-
-                }
+                nextPressed();
             }
         });
         if (isTwoPane){
@@ -185,9 +174,35 @@ public class EnterPasswordFrag extends Fragment {
                     itemClick(scanResult);
                 }
             });
+            wifiListFrag.setDataChangeListener(new WifiListFrag.DataChangeListener() {
+                @Override
+                public void onChanged(List<ScanResult> list) {
+                    init();
+                }
+            });
         }
     }
 
+    private void nextPressed(){
+        String ssid = wifiName.getText().toString();
+        String pword = passWord.getText().toString();
+        if (ssid.equals("")||pword.equals("")){
+            Toast.makeText(getContext(),"请输入wifi密码",Toast.LENGTH_SHORT).show();
+        }else {
+            ConnectUtil.setSsid(ssid);
+            ConnectUtil.setPassword(pword);
+            setPassword(ssid,pword);
+            if (WifiUtil.isWifiConnect(getContext())){
+                startNoticeActivity();
+            }else {
+//                        Log.e("edong","conncetWifi");
+                Toast.makeText(getActivity(),"正在连接WiFi请稍后……",Toast.LENGTH_SHORT).show();
+                ConnectUtil.conncetWifi(mWifiManager);
+                isNeedToNoticeActivity = true;
+            }
+
+        }
+    }
     private void itemClick(ScanResult scanResult){
         wifiName.setText(scanResult.SSID);
         setLastSelectWifi(scanResult.SSID);
@@ -200,6 +215,7 @@ public class EnterPasswordFrag extends Fragment {
     private void register(){
         IntentFilter filter = new IntentFilter();
         filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        filter.addAction(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION);
         getActivity().registerReceiver(mReceiver, filter);
     }
     @Override
@@ -223,15 +239,29 @@ public class EnterPasswordFrag extends Fragment {
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-//			Log.d(TAG, "======> getAction(): " + intent.getAction());
+//			Log.d("edong", "======> getAction(): " + intent.getAction());
             if (intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
-                if (isNeedToNoticeActivity&&WifiUtil.isWifiConnect(getContext())){
+                NetworkInfo info = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+                Log.e("edong","wifi,info.isConnected()="+info.isConnected());
+                if (isNeedToNoticeActivity&&info.isConnected()){
                     isNeedToNoticeActivity = false;
                     startNoticeActivity();
+                }
+            }else if (intent.getAction().equals(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION)) {
+
+                int linkWifiResult = intent.getIntExtra(WifiManager.EXTRA_SUPPLICANT_ERROR, 123);
+//                Log.e("edong","wifi密码错误广播"+linkWifiResult);
+                if (linkWifiResult == WifiManager.ERROR_AUTHENTICATING) {
+                    Toast.makeText(getActivity(),"密码错误",Toast.LENGTH_LONG).show();
                 }
             }
         }
     };
+    public void onEnterPressed(){
+        if (passWord.getText().toString().length()>=8) {
+            nextBt.performClick();
+        }
+    }
 
     public boolean onBackPressed(){
         if (wifiListPopu!=null&&wifiListPopu.isShowing()){

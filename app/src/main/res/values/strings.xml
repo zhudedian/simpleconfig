@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">智能配网</string>
+    <string name="default_wifi_name">请选择Wi-Fi</string>
 </resources>
