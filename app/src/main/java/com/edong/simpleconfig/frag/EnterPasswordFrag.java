@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
@@ -18,22 +17,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.edong.simpleconfig.MainActivity;
 import com.edong.simpleconfig.NoticeActivity;
 import com.edong.simpleconfig.R;
 import com.edong.simpleconfig.util.ConnectUtil;
 import com.edong.simpleconfig.util.WifiUtil;
-import com.edong.simpleconfig.wifi.WifiAdapter;
 import com.edong.simpleconfig.wifi.WifiListPopu;
 
 import java.util.List;
+
+import skin.support.SkinCompatManager;
 
 import static android.content.Context.WIFI_SERVICE;
 
@@ -65,10 +62,10 @@ public class EnterPasswordFrag extends Fragment {
         }else {
             isTwoPane = false;
         }
+
         setListener();
     }
     public  void init(){
-
 
         if(WifiUtil.getWifiStatus() != WifiManager.WIFI_STATE_ENABLED) {
             WifiUtil.wifiOpen();
@@ -133,6 +130,7 @@ public class EnterPasswordFrag extends Fragment {
             }
         }
     };
+    private boolean isClicked = false;
     private void setListener(){
 
 
@@ -163,6 +161,15 @@ public class EnterPasswordFrag extends Fragment {
         nextBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                if (isClicked){
+//                    isClicked = false;
+//                    SkinCompatManager.getInstance().loadSkin("light", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN);
+//
+//
+//                }else {
+//                    isClicked = true;
+//                    SkinCompatManager.getInstance().restoreDefaultTheme();
+//                }
                 nextPressed();
             }
         });

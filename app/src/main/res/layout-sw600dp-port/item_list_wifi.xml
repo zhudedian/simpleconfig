@@ -18,6 +18,6 @@
         android:layout_marginLeft="20dp"
         android:singleLine="true"
         android:textSize="20sp"
-        android:textColor="#fff"/>
+        android:textColor="@color/text_default"/>
 
 </LinearLayout>

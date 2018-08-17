@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/base_view"
-    android:background="#191a23"
+    android:background="@color/back_activity"
     >
     <fragment
         android:id="@+id/enter_password_frag"

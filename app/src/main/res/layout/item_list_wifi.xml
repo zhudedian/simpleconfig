@@ -10,7 +10,8 @@
     <com.edong.simpleconfig.view.WifiSignalView
         android:id="@+id/wifi_signal_icon"
         android:layout_width="28dp"
-        android:layout_height="28dp" />
+        android:layout_height="28dp"
+        />
     <TextView
         android:id="@+id/wifi_name"
         android:layout_width="wrap_content"
@@ -18,6 +19,6 @@
         android:layout_marginLeft="20dp"
         android:singleLine="true"
         android:textSize="20sp"
-        android:textColor="#fff"/>
+        android:textColor="@color/text_default"/>
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.edong.simpleconfig.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -8,19 +9,28 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Region;
 import android.os.Build;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.edong.simpleconfig.R;
+
+import skin.support.widget.SkinCompatBackgroundHelper;
+import skin.support.widget.SkinCompatSupportable;
+import skin.support.widget.SkinCompatTextHelper;
 
 
 /**
  * Created by yd on 2018/5/18.
  */
 
-public class WifiSignalView extends View {
+public class WifiSignalView extends View implements SkinCompatSupportable {
 
+    private TypedArray typedArray;
+    private AttributeSet attrs;
+    private int defStyleAttr;
     private Paint mPaint;
     private float radius1, radius2;
     private float paintWidth = 4f;
@@ -44,6 +54,9 @@ public class WifiSignalView extends View {
     public WifiSignalView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
+        this.attrs = attrs;
+        this.defStyleAttr = defStyleAttr;
+
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(Color.WHITE);
         mPaint.setAlpha(255);
@@ -51,7 +64,8 @@ public class WifiSignalView extends View {
         mPaint.setStrokeWidth(paintWidth);
         mPaint.setStrokeCap(Paint.Cap.ROUND);//没有
         mPaint.setStrokeJoin(Paint.Join.BEVEL);//直线
-
+        typedArray = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.WifiSignalView, defStyleAttr, 0);
+        color = typedArray.getColor(R.styleable.WifiSignalView_lineColor,Color.WHITE);
 
     }
 
@@ -137,6 +151,22 @@ public class WifiSignalView extends View {
         }
     }
 
+
+
+    @Override
+    public void setBackgroundResource(@DrawableRes int resId) {
+        super.setBackgroundResource(resId);
+
+        Log.e("edong","setBackgroundResource()，resId="+resId);
+    }
+
+
+
+    @Override
+    public void applySkin() {
+        Log.e("edong","applySkin()");
+        postInvalidate();
+    }
     private double aSin(double sin){
         return Math.asin(sin)*180/ Math.PI;
     }

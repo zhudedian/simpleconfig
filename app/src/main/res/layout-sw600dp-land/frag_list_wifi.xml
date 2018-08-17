@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="35sp"
-        android:textColor="#fff"
+        android:textColor="@color/text_default"
         android:text="wifi列表"
         android:singleLine="true"
         android:background="@drawable/back_title_wifi_list"/>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/base_view"
-    android:background="#191a23"
+    android:background="@color/back_activity"
     >
     <FrameLayout
         android:id="@+id/wifi_list_layout"
@@ -23,7 +23,7 @@
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:layout_marginTop="60dp"
-        android:background="#9f6e6e6e"/>
+        android:background="@color/line_default"/>
     <fragment
         android:id="@+id/enter_password_frag"
         android:name="com.edong.simpleconfig.frag.EnterPasswordFrag"

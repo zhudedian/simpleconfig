@@ -36,6 +36,9 @@ import com.edong.simpleconfig.wifi.WifiListPopu;
 
 import java.util.List;
 
+import skin.support.SkinCompatManager;
+
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 //            Toast.makeText(MainActivity.this,"权限申请成功",Toast.LENGTH_LONG).show();
             init();
         }
+
     }
 
     @Override
@@ -81,8 +85,6 @@ public class MainActivity extends AppCompatActivity {
 
         enterPasswordFrag = (EnterPasswordFrag)getSupportFragmentManager().findFragmentById(R.id.enter_password_frag);
         enterPasswordFrag.init();
-
-
 
     }
 
