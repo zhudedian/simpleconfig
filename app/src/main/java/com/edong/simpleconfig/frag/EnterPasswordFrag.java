@@ -130,7 +130,6 @@ public class EnterPasswordFrag extends Fragment {
             }
         }
     };
-    private boolean isClicked = false;
     private void setListener(){
 
 
@@ -161,15 +160,6 @@ public class EnterPasswordFrag extends Fragment {
         nextBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (isClicked){
-//                    isClicked = false;
-//                    SkinCompatManager.getInstance().loadSkin("light", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN);
-//
-//
-//                }else {
-//                    isClicked = true;
-//                    SkinCompatManager.getInstance().restoreDefaultTheme();
-//                }
                 nextPressed();
             }
         });
@@ -249,7 +239,7 @@ public class EnterPasswordFrag extends Fragment {
 //			Log.d("edong", "======> getAction(): " + intent.getAction());
             if (intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
                 NetworkInfo info = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
-                Log.e("edong","wifi,info.isConnected()="+info.isConnected());
+//                Log.e("edong","wifi,info.isConnected()="+info.isConnected());
                 if (isNeedToNoticeActivity&&info.isConnected()){
                     isNeedToNoticeActivity = false;
                     startNoticeActivity();

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary_light">#333333</color>
+    <color name="colorPrimary_light">#a4a4a4</color>
     <color name="colorPrimaryDark_light">#818181</color>
     <color name="colorAccent_light">#FF4081</color>
 
     <color name="back_activity_light">#ffffff</color>
     <color name="back_frag_enter_password_light">#ffffff</color>
     <color name="back_frag_wifi_list_light">#7c9b9b9b</color>
+    <color name="back_popup_over_flow_light">#c1c1c1</color>
     <color name="line_default_light">#9f353535</color>
     <color name="text_default_light">#181818</color>
 

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ffffff</color>
-    <color name="colorPrimaryDark">#191a23</color>
+    <color name="colorPrimary">#2e2e2e</color>
+    <color name="colorPrimaryDark">#262626</color>
     <color name="colorAccent">#FF4081</color>
 
 
     <color name="back_activity">#191a23</color>
     <color name="back_frag_enter_password">#191a23</color>
     <color name="back_frag_wifi_list">#7c3e3e3e</color>
+    <color name="back_popup_over_flow">#414141</color>
     <color name="line_default">#9f6e6e6e</color>
     <color name="text_default">#fff</color>
     <color name="driver_list_wifi">#a6666873</color>
