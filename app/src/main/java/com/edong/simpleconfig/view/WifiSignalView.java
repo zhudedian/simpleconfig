@@ -17,9 +17,15 @@ import android.view.View;
 
 import com.edong.simpleconfig.R;
 
+import java.lang.reflect.Field;
+
+import skin.support.content.res.SkinCompatResources;
 import skin.support.widget.SkinCompatBackgroundHelper;
+import skin.support.widget.SkinCompatHelper;
 import skin.support.widget.SkinCompatSupportable;
 import skin.support.widget.SkinCompatTextHelper;
+
+
 
 
 /**
@@ -28,9 +34,7 @@ import skin.support.widget.SkinCompatTextHelper;
 
 public class WifiSignalView extends View implements SkinCompatSupportable {
 
-    private TypedArray typedArray;
-    private AttributeSet attrs;
-    private int defStyleAttr;
+
     private Paint mPaint;
     private float radius1, radius2;
     private float paintWidth = 4f;
@@ -38,6 +42,7 @@ public class WifiSignalView extends View implements SkinCompatSupportable {
     private float height2;
     private float paddingLeft,paddingRight,paddingTop,paddingBottom;
 
+    private int singleColorId = 0;
     private int color = 0;
     private boolean isLocked = true;
     private int level = 100;
@@ -54,8 +59,6 @@ public class WifiSignalView extends View implements SkinCompatSupportable {
     public WifiSignalView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        this.attrs = attrs;
-        this.defStyleAttr = defStyleAttr;
 
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(Color.WHITE);
@@ -64,8 +67,11 @@ public class WifiSignalView extends View implements SkinCompatSupportable {
         mPaint.setStrokeWidth(paintWidth);
         mPaint.setStrokeCap(Paint.Cap.ROUND);//没有
         mPaint.setStrokeJoin(Paint.Join.BEVEL);//直线
-        typedArray = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.WifiSignalView, defStyleAttr, 0);
-        color = typedArray.getColor(R.styleable.WifiSignalView_lineColor,Color.WHITE);
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.WifiSignalView, defStyleAttr, 0);
+        singleColorId = typedArray.getResourceId(R.styleable.WifiSignalView_lineColor,0);
+        singleColorId = SkinCompatHelper.checkResourceId(singleColorId);
+        typedArray.recycle();
+        applyWifiSignalViewResources();
 
     }
 
@@ -93,6 +99,21 @@ public class WifiSignalView extends View implements SkinCompatSupportable {
         this.color = color;
     }
 
+    private void setSingleColor(int color) {
+        try {
+            Field barColor = WifiSignalView.class.getDeclaredField("color");
+            barColor.setAccessible(true);
+            barColor.set(this, color);
+            invalidate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void applyWifiSignalViewResources() {
+        if (singleColorId != 0) {
+            setSingleColor(SkinCompatResources.getColor(getContext(), singleColorId));
+        }
+    }
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -164,8 +185,8 @@ public class WifiSignalView extends View implements SkinCompatSupportable {
 
     @Override
     public void applySkin() {
-        Log.e("edong","applySkin()");
-        postInvalidate();
+//        Log.e("edong","applySkin()");
+        applyWifiSignalViewResources();
     }
     private double aSin(double sin){
         return Math.asin(sin)*180/ Math.PI;

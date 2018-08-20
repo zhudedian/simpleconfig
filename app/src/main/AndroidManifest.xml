@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"
+            android:label="智能配网"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustUnspecified|stateHidden">
             <intent-filter>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/base_view"
-    android:background="#191a23"
+    android:background="@color/back_activity"
     tools:context=".ConfigActivity">
 
     <LinearLayout
@@ -22,7 +22,7 @@
             android:text="正在配网中"
             android:gravity="center_horizontal"
             android:textSize="30sp"
-            android:textColor="#fff"/>
+            android:textColor="@color/text_default"/>
 
         <com.edong.simpleconfig.view.ProgressIcon
             android:id="@+id/fresh_view"

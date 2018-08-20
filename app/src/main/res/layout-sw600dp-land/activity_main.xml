@@ -1,35 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/base_view"
     android:background="@color/back_activity"
     >
-    <FrameLayout
-        android:id="@+id/wifi_list_layout"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2">
-        <fragment
-            android:id="@+id/wifi_list_frag"
-            android:name="com.edong.simpleconfig.frag.WifiListFrag"
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/MyPopupTheme"
+            app:subtitleTextColor="@color/text_default"
+            app:titleTextColor="@color/text_default"
             />
-    </FrameLayout>
-    <View
-        android:id="@+id/mid_line"
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
-        android:background="@color/line_default"/>
-    <fragment
-        android:id="@+id/enter_password_frag"
-        android:name="com.edong.simpleconfig.frag.EnterPasswordFrag"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="3"/>
+    </android.support.design.widget.AppBarLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/wifi_list_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+            <fragment
+                android:id="@+id/wifi_list_frag"
+                android:name="com.edong.simpleconfig.frag.WifiListFrag"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </FrameLayout>
+        <View
+            android:id="@+id/mid_line"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:background="@color/line_default"/>
+        <fragment
+            android:id="@+id/enter_password_frag"
+            android:name="com.edong.simpleconfig.frag.EnterPasswordFrag"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"/>
 
-
+    </LinearLayout>
 </LinearLayout>

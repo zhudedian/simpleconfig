@@ -4,7 +4,7 @@
         <gradient
             android:startColor="#fff"
             android:centerY="0.5"
-            android:endColor="@color/back_frag_wifi_list"
+            android:endColor="@color/back_frag_wifi_list_light"
             android:angle="270"
             />
 

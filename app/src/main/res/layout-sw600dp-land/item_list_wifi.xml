@@ -12,6 +12,7 @@
         android:id="@+id/wifi_signal_icon"
         android:layout_width="45dp"
         android:layout_height="45dp"
+        app:lineColor="@color/text_default"
         />
     <TextView
         android:id="@+id/wifi_name"

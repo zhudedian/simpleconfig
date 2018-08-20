@@ -6,6 +6,26 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
+        <item name="android:textColorPrimary">@color/text_default</item>
+        <item name="android:textColorSecondary">@color/text_default</item>
+        <item name="actionOverflowMenuStyle">@style/MyPopupTheme</item>
 
+    </style>
+    <style name="MyPopupTheme">
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownWidth">wrap_content</item>
+        <item name="android:background">@color/back_popup_over_flow</item>
+        <item name="android:dropDownVerticalOffset">0dip</item>
+        <item name="android:dropDownHorizontalOffset">0dip</item>
+        <item name="android:dropDownListViewStyle">@style/PopupMenuListView</item>
+
+    </style>
+    <style name="PopupMenuListView" parent="@android:style/Widget.Holo.ListView.DropDown">
+
+        <item name="android:divider">@color/back_activity</item><!--menu列表项分割线的颜色-->
+        <item name="android:dividerHeight">1px</item><!--menu列表项分割线的高度-->
+    </style>
+    <style name="OverflowButtonStyle" parent="@android:style/Widget.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_menu_overflow_material</item>
+    </style>
 </resources>

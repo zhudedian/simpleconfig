@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/base_view"
-    android:background="#191a23"
+    android:background="@color/back_activity"
     tools:context=".NoticeActivity">
 
     <TextView
@@ -17,7 +17,7 @@
         android:text="请长按音响顶部圆形配网按钮，蓝色灯亮起后点击开始配网"
         android:gravity="center_horizontal"
         android:textSize="30sp"
-        android:textColor="#9b9b9b"/>
+        android:textColor="@color/text_default"/>
 
     <Button
         android:id="@+id/next_button"
