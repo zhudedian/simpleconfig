@@ -50,6 +50,7 @@
         android:text="结束配网"
         android:textColor="#ffffff"
         android:textSize="30sp"
+        android:transitionName="button"
         android:background="@drawable/back_button_tip"/>
 
 </RelativeLayout>

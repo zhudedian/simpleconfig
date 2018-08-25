@@ -1,6 +1,8 @@
 package com.edong.simpleconfig;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
@@ -8,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.edong.simpleconfig.util.ConnectUtil;
 import com.edong.simpleconfig.view.ProgressIcon;
@@ -30,8 +33,9 @@ public class ConfigActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ConnectUtil.stopConfig();
-                startMainActivity();
-                finish();
+                Toast.makeText(ConfigActivity.this,"正在结束配网……",Toast.LENGTH_SHORT).show();
+//                startMainActivity();
+//                finish();
             }
         });
         startConfig();
@@ -44,7 +48,11 @@ public class ConfigActivity extends AppCompatActivity {
     }
     private void startMainActivity(){
         Intent intent = new Intent(ConfigActivity.this,MainActivity.class);
-        startActivity(intent);
+        if (Build.VERSION.SDK_INT<21){
+            startActivity(intent);
+        }else {
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(ConfigActivity.this, endBt, "button").toBundle());
+        }
     }
 
     @Override
@@ -66,15 +74,5 @@ public class ConfigActivity extends AppCompatActivity {
             }
         }
     }
-    //    private void logSCParam(){
-//        Log.e("edong","SC_SSID="+SCParam.SC_SSID+",SC_PASSWD="+SCParam.SC_PASSWD
-//                +",\nSC_PIN="+SCParam.SC_PIN+",SC_BSSID="+SCParam.SC_BSSID
-//                +",\nSC_PKT_TYPE="+SCParam.SC_PKT_TYPE+",SC_PKT_TYPE="+SCParam.SC_SOFTAP_MODE
-//                +",\nTotalConfigTimeMs="+SCLibrary.TotalConfigTimeMs+",OldModeConfigTimeMs="+SCLibrary.OldModeConfigTimeMs
-//                +",\nProfileSendRounds="+SCLibrary.ProfileSendRounds+",ProfileSendTimeIntervalMs="+SCLibrary.ProfileSendTimeIntervalMs
-//                +",\nPacketSendTimeIntervalMs="+SCLibrary.PacketSendTimeIntervalMs
-//                +",\nEachPacketSendCounts="+SCLibrary.EachPacketSendCounts
-//                +",\nSC_HOSTIP="+SCParam.SC_HOSTIP+",SC_WIFI_Interface="+SCParam.SC_WIFI_Interface
-//                +",\nSC_PHONE_MAC_ADDR="+SCParam.SC_PHONE_MAC_ADDR);
-//    }
+
 }

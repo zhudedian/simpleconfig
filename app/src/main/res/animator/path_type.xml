@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<objectAnimator
+    xmlns:androd="http://schemas.android.com/apk/res/android"
+    androd:duration="1500"
+    androd:propertyName="pathData"
+    androd:repeatCount="infinite"
+    androd:repeatMode="reverse"
+    androd:valueFrom="
+                    M 2,12 v-10 a0,0,0,0,0,0,0 h10  h10 a0,0,0,0,0,0,0 v10   v10 a0,0,0,0,0,0,0 h-10  h-10 a0,0,0,0,0,0,0 v-10z"
+    androd:valueTo="
+                    M2,12 v0 a10,10 0,0,1 10,-10 h0  h0 a10,10 0,0,1 10,10v0 v0 a10,10 0,0,1 -10,10h0 h0 a10,10 0,0,1 -10,-10v0z"
+    androd:valueType="pathType">
+</objectAnimator>

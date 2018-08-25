@@ -31,5 +31,6 @@
         android:text="开始配网"
         android:textColor="#ffffff"
         android:textSize="25sp"
+        android:transitionName="button"
         android:background="@drawable/back_button_tip"/>
 </RelativeLayout>

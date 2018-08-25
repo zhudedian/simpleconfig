@@ -1,0 +1,17 @@
+<vector android:height="24dp"
+
+    android:viewportHeight="24.0"
+    android:viewportWidth="24.0"
+    android:width="24dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <path
+        android:name="apple"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="0.2"
+
+        android:pathData="M 2,12 v-10 a0,0,0,0,0,0,0 h10  h10 a0,0,0,0,0,0,0 v10   v10 a0,0,0,0,0,0,0 h-10  h-10 a0,0,0,0,0,0,0 v-10
+                          L2,12 v0 a10,10 0,0,1 10,-10 h0  h0 a10,10 0,0,1 10,10v0 v0 a10,10 0,0,1 -10,10h0 h0 a10,10 0,0,1 -10,-10v0z"/>
+
+</vector>

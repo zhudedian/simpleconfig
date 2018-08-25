@@ -1,6 +1,8 @@
 package com.edong.simpleconfig;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ public class NoticeActivity extends AppCompatActivity {
         if (actionBar!=null){
             actionBar.hide();
         }
+
         nextBt = (Button)findViewById(R.id.next_button);
         nextBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,13 +32,21 @@ public class NoticeActivity extends AppCompatActivity {
 
     private void startConfigActivity(){
         Intent intent = new Intent(NoticeActivity.this,ConfigActivity.class);
-        startActivity(intent);
-        finish();
+        if (Build.VERSION.SDK_INT<21){
+            startActivity(intent);
+        }else {
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(NoticeActivity.this, nextBt, "button").toBundle());
+        }
+
     }
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(NoticeActivity.this,MainActivity.class);
-        startActivity(intent);
+        if (Build.VERSION.SDK_INT<21){
+            startActivity(intent);
+        }else {
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(NoticeActivity.this, nextBt, "button").toBundle());
+        }
 
     }
 }

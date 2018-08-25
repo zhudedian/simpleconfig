@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
@@ -14,6 +15,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +32,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements SkinCompatSupport
 //            Toast.makeText(MainActivity.this,"权限申请成功",Toast.LENGTH_LONG).show();
             init();
         }
+//        ImageView imageView = (ImageView)findViewById(R.id.image_view);
+//        Drawable drawable = imageView.getDrawable();
+//        if (drawable instanceof Animatable){
+//            ((Animatable)drawable).start();
+//        }
 
     }
 
@@ -100,10 +108,8 @@ public class MainActivity extends AppCompatActivity implements SkinCompatSupport
         }
     }
     private  void init(){
-
         enterPasswordFrag = (EnterPasswordFrag)getSupportFragmentManager().findFragmentById(R.id.enter_password_frag);
         enterPasswordFrag.init();
-
     }
 
     private void initToolbar(){

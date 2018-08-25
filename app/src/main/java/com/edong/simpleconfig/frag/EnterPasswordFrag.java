@@ -1,5 +1,7 @@
 package com.edong.simpleconfig.frag;
 
+
+import android.app.ActivityOptions;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,12 +10,13 @@ import android.content.SharedPreferences;
 import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,15 +25,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.edong.simpleconfig.NoticeActivity;
 import com.edong.simpleconfig.R;
 import com.edong.simpleconfig.util.ConnectUtil;
 import com.edong.simpleconfig.util.WifiUtil;
 import com.edong.simpleconfig.wifi.WifiListPopu;
 
+
 import java.util.List;
 
-import skin.support.SkinCompatManager;
 
 import static android.content.Context.WIFI_SERVICE;
 
@@ -105,6 +109,10 @@ public class EnterPasswordFrag extends Fragment {
             }
         }
 
+    }
+
+    public View getNextButton(){
+        return nextBt;
     }
 
     public EditText getEditText() {
@@ -231,7 +239,11 @@ public class EnterPasswordFrag extends Fragment {
     }
     private void startNoticeActivity(){
         Intent intent = new Intent(getContext(),NoticeActivity.class);
-        startActivity(intent);
+        if (Build.VERSION.SDK_INT<21){
+            startActivity(intent);
+        }else {
+            getActivity().startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity(), nextBt, "button").toBundle());
+        }
     }
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
